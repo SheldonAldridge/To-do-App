@@ -82,6 +82,17 @@ header h1{
 	-webkit-text-fill-color: transparent;
 }
 
+.date
+{
+  display: none;
+  position: absolute;
+  margin-left:1rem;
+  font-size: 1.25rem;
+	background-image: linear-gradient(to right, var(--pink), var(--purple));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
 	cursor: pointer;
 	border-radius: 4px;
@@ -152,14 +163,10 @@ main {
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	margin-left: -0.5rem;
+  margin-left: -3.5rem;
+  margin-top:-0.3rem;
   }
-  
-  .tick::before {
-	content: '✓';
-	font-size: 20px;
-	display: none;
-  }
+
   
   .done .tick::before {
 	display: inline;
@@ -186,7 +193,7 @@ main {
 	margin-bottom: 1rem;
 }
 
-#tasks .tasks .content .text .dueDate{
+#tasks .tasks .content .text .due-date{
 	color: var(--light);
 	font-size: 1.125rem;
 	width:100%;
@@ -197,20 +204,21 @@ main {
 .task .content {
 	flex: 1 1 0%;
 	display: flex;
-    align-items: center;
+  align-items: center;
+  flex-wrap: wrap
 }
 
-.task .content .text .dueDate:not(:read-only) {
+.task .content .text .due-date:not(:read-only) {
 	color: var(--pink);
 }
 
-.dueDate
+.due-date
 {
-	margin-left: 30rem;
+  margin-left: 30rem;
     position: absolute;
 }
 
-.task .content .text {
+.task .content {
 	background-color: var(--darker);
 	padding: 1rem;
 	border-radius: 1rem;
@@ -221,6 +229,11 @@ main {
 	  transition: 0.4s;
 	  margin-left: 2rem;
   }
+
+.text
+{
+  margin-left: -11rem;
+}
 
 .task .actions {
 	display: flex;
@@ -249,6 +262,8 @@ main {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
+
 
 .task .actions .delete {
 	color: crimson;
@@ -590,7 +605,7 @@ main {
   margin-top: 1rem;
 }
 
-.dueDate {
+.due-date {
   margin-left: 20em;
   font-size:0.8rem;
 }
