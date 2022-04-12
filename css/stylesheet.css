@@ -184,7 +184,24 @@ main {
 	margin-bottom: 1rem;
 }
 
-#tasks .task {
+.sort
+{
+  display:none;
+  position: absolute;
+  cursor: pointer;
+	color: var(--pink);
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.4s;
+    margin-top: -2.5rem;
+    margin-left:42rem;
+}
+
+#tasks .task{
 	display: flex;
 	justify-content: space-between;
 	background-color: var(--darkest);
@@ -201,11 +218,9 @@ main {
 	transition: 0.4s;
   }
 
-.task .content {
+.task .content .due-date{
 	flex: 1 1 0%;
-	display: flex;
-  align-items: center;
-  flex-wrap: wrap
+
 }
 
 .task .content .text .due-date:not(:read-only) {
@@ -214,8 +229,8 @@ main {
 
 .due-date
 {
-  margin-left: 30rem;
-    position: absolute;
+    margin-left: 23rem;
+    
 }
 
 .task .content {
@@ -276,7 +291,7 @@ main {
     height:100%;
     -webkit-transform: rotateZ(45deg);
     transform:rotate(45deg);
-	top: 317px;
+	  top: 317px;
     left: 312px;
 	z-index:-1;
 }
