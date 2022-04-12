@@ -34,6 +34,7 @@
 	const tasks = document.createElement("div");
 
     tasks.innerHTML = `
+    <button class = "sort">Sort</button>
     <div class="task" date-id = "${id}">
         <div class="content">
             <input type ="checkbox" class="tick">
@@ -43,8 +44,8 @@
         </div>
 
         <div class = "actions">
-            <button class="edit" data-id="${id}>Edit</button>
-            <button class="delete" data-id="${id}>Delet</button>
+            <button class="edit" data-id="${id}">Edit</button>
+            <button class="delete" data-id="${id}">Delet</button>
         </div>
     </div>
     `
@@ -63,7 +64,6 @@
     const {id} = target.dataset
     const task = id ? document.querySelector('[data-id="${id}"]'): null
     
-    
     const type = {
         edit: event.target.classList.contains('edit'),
         delete: event.target.classList.contains('delete'),
@@ -72,7 +72,7 @@
     const isFromSaveLabel = target.innerText.toLowerCase() === 'save'
 
     if(tasks && type.edit && isFromSaveLabel){
-        const text = tasks.querySelector('text')
+        const text = task.querySelector('text')
         target.innerText = 'Edit'
         text.addAttribute('readonly')
         return
@@ -98,4 +98,6 @@ const submitHandler = (event) =>{
 }
 
 elements.form.addEventListener("submit", submitHandler);
+
+
 
