@@ -1,15 +1,15 @@
 
 function startTime() {
     const today = new Date();
-    let h = today.getHours();
-    let m = today.getMinutes();
-    let s = today.getSeconds();
+    let hour = today.getHours();
+    let minutes = today.getMinutes();
+    let seconds = today.getSeconds();
     let day = today.getDay();
     let month = today.getMonth();
     let year = today.getFullYear();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.querySelector('.dateTime').innerHTML =  h + ":" + m + ":" + s;
+    minutes = checkTime(minutes);
+    seconds = checkTime(seconds);
+    document.querySelector('.dateTime').innerHTML =  hour + ":" + minutes + ":" + seconds;
     document.querySelector('.day').innerHTML =  day + "/" + month + "/" + year;
     setTimeout(startTime, 1000);
   }
