@@ -1,106 +1,101 @@
-//const STORAGE_KEY = "task-storage-key";
 
-window.addEventListener('load', () => {
-	const form = document.querySelector("#new-task-form");
-	const input = document.querySelector("#new-task-input");
-	const list_el = document.querySelector("#tasks");
-	const cal_el = document.querySelector("#calendar");
+/************************************
+ * creates objct of elements needed *
+ ************************************/
 
-	form.addEventListener('submit', (e) => {
-		e.preventDefault();
+ const elements = {
+	form: document.querySelector("#new-task-form"),
+	input: document.querySelector("#new-task-input"),
+	list: document.querySelector("#tasks"),
+	cal: document.querySelector("#calendar")
+}
 
-		const task = input.value;
-		const date = cal_el.value;
+/****************************
+ * Generates an ID for task *
+ ****************************/
+
+ const createId = () => `${Math.floor(Math.random() * 10000)}-${new Date().getTime()}`
 
 
-		if(!task && !date)
-		{
-			alert("Please fill in task and select date")
-			return
-			
-		}
-		if(!task)
-		{
-			alert("Please fill in task")
-			return
-		}
-		if(!date)
-		{
-			alert("Please fill select date")
-			return
-		}
 
-		const task_el = document.createElement('div');
-		task_el.classList.add('task');
+/**********************************************
+ * function that creates the HTML elements *
+ **********************************************/
 
-		const task_content_el = document.createElement('div');
-		task_content_el.classList.add('content');
+ const createTask = () => {
+    const id = createId()
+    const task = elements.input.value;
+    const date = elements.cal.value;
 
-		task_el.appendChild(task_content_el);
+    if(!task && !date) return alert("Please fill in task and select date");
+    if(!task) return alert("Please fill in task");
+    if(!date) return alert("Please select date");
 
-		const task_input_el = document.createElement('input');
-		task_input_el.classList.add('text');
-		task_input_el.type = 'text';
-		task_input_el.value = task;
-		task_input_el.setAttribute('readonly', 'readonly');
+	const tasks = document.createElement("div");
 
-		task_content_el.appendChild(task_input_el);	
-		
-		const checkbox = document.createElement('input')
-		checkbox.type = "checkbox";
-		checkbox.classList.add('tick')
+    tasks.innerHTML = `
+    <div class="task" date-id = "${id}">
+        <div class="content">
+            <input type ="checkbox" class="tick">
+            <input type ="text" class = text id = "text" data-id="" readonly>${task}
+            <label class = "due-date" for ="text">${date}</label>
+            <input type ="date" class = date id = "date">
+        </div>
 
-		task_content_el.appendChild(checkbox);
-	
-		console.log(checkbox);
+        <div class = "actions">
+            <button class="edit" data-id="${id}>Edit</button>
+            <button class="delete" data-id="${id}>Delet</button>
+        </div>
+    </div>
+    `
 
-		
+    elements.list.appendChild(tasks)
+    return tasks
+}
 
-		const due_date = document.createElement('label');
-		due_date.htmlFor = "text";
-		due_date.classList.add('dueDate');
-		due_date.innerText = cal_el.value;
+/**************************************************************
+ * Event that listens for the submit, edit and delete button  *
+ **************************************************************/
 
-		task_content_el.appendChild(due_date);
+ elements.list.addEventListener('click',event => {
+    const {target} = event;
 
-		const task_actions_el = document.createElement('div');
-		task_actions_el.classList.add('actions');
-		
-		const task_edit_el = document.createElement('button');
-		task_edit_el.classList.add('edit');
-		task_edit_el.innerText = 'Edit';
+    const {id} = target.dataset
+    const task = id ? document.querySelector('[data-id="${id}"]'): null
+    
+    
+    const type = {
+        edit: event.target.classList.contains('edit'),
+        delete: event.target.classList.contains('delete'),
+    }
 
-		const task_delete_el = document.createElement('button');
-		task_delete_el.classList.add('delete');
-		task_delete_el.innerText = 'Delete';
+    const isFromSaveLabel = target.innerText.toLowerCase() === 'save'
 
-		task_actions_el.appendChild(task_edit_el);
-		task_actions_el.appendChild(task_delete_el);
+    if(tasks && type.edit && isFromSaveLabel){
+        const text = tasks.querySelector('text')
+        target.innerText = 'Edit'
+        text.addAttribute('readonly')
+        return
+    }
 
-		task_el.appendChild(task_actions_el);
+    if(tasks && type.edit){
+        const text = task.querySelector('text')
+        target.innerText = 'Save'
+        text.removeAttribute('readonly')
+        text.focus()
+        return
+    }
 
-		list_el.appendChild(task_el);
-
-		input.value = '';
-
-        task_edit_el.addEventListener('click', () =>{
-            if(task_edit_el.innerText.toLowerCase() == "edit")
-            {
-            task_input_el.removeAttribute("readonly");
-            task_input_el.focus();
-            task_edit_el.innerText = "Save";
-            }
-            else
-            {
-                task_input_el.setAttribute("readonly","readonly");
-                task_edit_el.innerText = "Edit";
-            }
-        });
-
-        task_delete_el.addEventListener('click', () => {
-            list_el.removeChild(task_el);
-        });
-		
-    });
-
+    if(tasks && type.delete){
+        return
+    }
+    
 });
+
+const submitHandler = (event) =>{
+    event.preventDefault();
+    createTask();
+}
+
+elements.form.addEventListener("submit", submitHandler);
+
