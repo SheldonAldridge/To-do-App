@@ -38,14 +38,14 @@
     <div class="task" date-id = "${id}">
         <div class="content">
             <input type ="checkbox" class="tick">
-            <input type ="text" class = text id = "text" data-id="" readonly>${task}
+            <input type ="text" class = text id = "text" readonly>${task}
             <label class = "due-date" for ="text">${date}</label>
             <input type ="date" class = date id = "date">
         </div>
 
         <div class = "actions">
             <button class="edit" data-id="${id}">Edit</button>
-            <button class="delete" data-id="${id}">Delet</button>
+            <button class="delete" data-id="${id}">Delete</button>
         </div>
     </div>
     `
@@ -66,27 +66,27 @@
     
     const type = {
         edit: event.target.classList.contains('edit'),
-        delete: event.target.classList.contains('delete'),
+        delete: event.target.classList.contains('delete')
     }
 
     const isFromSaveLabel = target.innerText.toLowerCase() === 'save'
 
-    if(tasks && type.edit && isFromSaveLabel){
+    if(task && type.edit && isFromSaveLabel){
         const text = task.querySelector('text')
         target.innerText = 'Edit'
         text.addAttribute('readonly')
         return
-    }
+    };
 
-    if(tasks && type.edit){
+    if(task && type.edit){
         const text = task.querySelector('text')
-        target.innerText = 'Save'
+        target.innerText = 'save'
         text.removeAttribute('readonly')
         text.focus()
         return
-    }
+    };
 
-    if(tasks && type.delete){
+    if(task && type.delete){
         return
     }
     
