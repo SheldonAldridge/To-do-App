@@ -1,284 +1,158 @@
-@import url("https://fonts.googleapis.com/css2?family=Syne&display=swap");
-
-@font-face {
-  font-family: digital-7;
-  src: url(../fonts/digital-7/digital-7.ttf);
-}
-:root {
-  --dark: #2d39e3;
-  --darker: #232975;
-  --darkest: #000a99;
-  --pink: #f700ff;
-  --purple: #8b5cf6;
-  --light: #eee;
-}
-
-* {
-  margin: 0;
+html {
   box-sizing: border-box;
-  font-family: "Fira sans", sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  background-color: #0CDBEB;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  color: #fff;
-  background-color: var(--dark);
+ font-family:
+ -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
+  Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+ line-height: 1.4;
 }
 
-header {
-  padding: 2rem 1rem;
-  max-width: 800px;
+.container {
   width: 100%;
+  max-width: 500px;
   margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #333;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  overflow-y: auto;
 }
 
-header h1 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--grey);
-  margin-bottom: 1rem;
+.app-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 80px;
+  opacity: 0.5;
 }
 
-.header {
+svg {
+  width: 64px;
+  height: 64px;
+}
+
+.todo-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.todo-item {
+  margin-bottom: 10px;
+  width: 100%;
   display: flex;
-}
-
-.time {
-  padding-left: 21rem;
-  font-size: 30px;
-  font-family: digital-7 !important;
-  color: var(--pink);
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.day {
-  font-size: 18px;
-  padding-bottom: 1rem;
-  font-family: "Fira sans", sans-serif;
-}
-
-.add-task {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  background-color: var(--darkest);
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
 }
 
-#calendar {
-  font-size: 1.25rem;
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.todo-item span {
+  flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 22px;
 }
 
-.date {
+.done span {
+  text-decoration: line-through;
+}
+
+input[type="checkbox"] {
   display: none;
-  position: absolute;
-  margin-left: 1rem;
-  font-size: 1.25rem;
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  border-radius: 4px;
-  filter: invert(34%) sepia(84%) saturate(1953%) hue-rotate(238deg)
-    brightness(101%) contrast(93%);
-  margin-left: -1rem;
-}
-
-#new-task-form {
-  display: flex;
-}
-
-input,
-button {
-  border: none;
-  outline: none;
-  background: none;
-}
-
-#new-task-input {
-  flex: 1 1 0%;
-  background-color: var(--darker);
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-right: 1rem;
-  color: var(--light);
-  font-size: 1.25rem;
-  width: 30rem;
-}
-
-#new-task-input::placeholder {
-  color: var(--light);
-}
-
-#new-task-submit {
-  color: var(--pink);
-  font-size: 1.25rem;
-  font-weight: 700;
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  cursor: pointer;
-  transition: 0.4s;
-  margin-top: -1rem;
-}
-
-#new-task-submit:hover {
-  opacity: 0.8;
-}
-
-#new-task-submit:active {
-  opacity: 0.6;
-}
-
-main {
-  flex: 1 1 0%;
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.task-list {
-  padding: 1rem;
-}
-
-.task-list h2 {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--light);
-  margin-bottom: 1rem;
-}
-
-#tasks .task {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--darkest);
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-}
-
-#tasks .tasks .content .text .due-date {
-  color: var(--light);
-  font-size: 1.125rem;
-  width: 100%;
-  display: block;
-  transition: 0.4s;
-}
-
-.task .content .due-date {
-  flex: 1 1 0%;
-}
-
-.task .content .text .due-date:not(:read-only) {
-  color: var(--pink);
-}
-
-.due-date {
-  margin-left: 23rem;
-}
-
-.task .content {
-  background-color: var(--darker);
-  padding: 1rem;
-  border-radius: 1rem;
-  color: var(--light);
-  font-size: 1.125rem;
-  width: 100%;
-  display: block;
-  transition: 0.4s;
-  margin-left: 2rem;
-}
-
-.text {
-  margin-left: -11rem;
-}
-
-.task .actions {
-  display: flex;
-  margin: 0 -0.5rem;
-}
-
-.task .actions button {
-  cursor: pointer;
-  margin: 0 0.5rem;
-  font-size: 1.125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  transition: 0.4s;
-}
-
-.task .actions button:hover {
-  opacity: 0.8;
-}
-
-.task .actions button:active {
-  opacity: 0.6;
-}
-
-.task .actions .edit {
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.task .actions .delete {
-  color: crimson;
-}
-
-.sort {
-  display: none;
-  position: absolute;
-  cursor: pointer;
-  color: var(--pink);
-  font-size: 1.25rem;
-  font-weight: 700;
-  background-image: linear-gradient(to right, var(--pink), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  cursor: pointer;
-  transition: 0.4s;
-  margin-top: -2.5rem;
-  margin-left: 42rem;
 }
 
 .tick {
-  position: absolute;
   width: 30px;
   height: 30px;
-  border: 1px solid var(--light);
+  border: 3px solid #333;
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: -3.5rem;
-  margin-top: -0.3rem;
+}
+
+.tick::before {
+  content: '✓';
+  font-size: 20px;
+  display: none;
+}
+
+.done .tick::before {
+  display: inline;
+}
+
+.delete-todo {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.delete-todo svg {
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 3px solid #333;
+}
+
+
+
+.empty-state {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.checklist-icon {
+  margin-bottom: 20px;
+}
+
+.empty-state__title, .empty-state__description {
+  margin-bottom: 20px;
+}
+
+
+.todo-list:empty {
+  display: none;
+}
+
+.todo-list:empty + .empty-state {
+  display: flex;
 }
 
 .sky {
-  position: relative;
-  width: 24%;
+  width: 86%;
   height: 100%;
   -webkit-transform: rotateZ(45deg);
   transform: rotate(45deg);
-  top: 317px;
-  left: 312px;
+  top: -44px;
+  left: -1594px;
   z-index: -1;
 }
 
 .sky2 {
-  position: relative;
   left: 684px;
   top: 496px;
   width: 24%;
@@ -289,7 +163,6 @@ main {
 }
 
 .sky3 {
-  position: relative;
   left: 332px;
   top: 704px;
   width: 24%;
@@ -493,103 +366,5 @@ main {
   100% {
     -webkit-transform: translateX(270px);
     transform: translateX(270px);
-  }
-}
-
-@media (max-width: 600px) {
-  header {
-    max-width: 601px;
-  }
-
-  header h1 {
-    font-size: 1.5rem;
-  }
-
-  .header {
-    display: inline-block;
-  }
-
-  .time {
-    position: absolute;
-    margin-top: -3.3rem;
-    font-size: 1.5rem;
-    margin-left: -3rem;
-  }
-
-  .day {
-    font-size: 0.8rem;
-  }
-
-  .add-task {
-    display: block;
-    padding: 1rem;
-    width: 22rem;
-  }
-
-  #new-task-form {
-    display: block;
-  }
-
-  #new-task-input {
-    width: 20rem;
-    border-radius: 0.5rem;
-  }
-
-  #new-task-input::placeholder {
-    font-size: 1rem;
-  }
-
-  #calendar {
-    padding-left: 12rem;
-    font-size: 1rem;
-    margin-top: 0.5rem;
-  }
-
-  #new-task-submit {
-    font-size: 1.1rem;
-  }
-
-  #tasks .task {
-    display: block;
-    width: 23rem;
-  }
-
-  .task .content .text {
-    font-size: 1rem;
-  }
-
-  .tick {
-    width: 20px;
-    height: 20px;
-    margin-left: 0.1rem;
-  }
-
-  .task .actions .edit {
-    font-size: 0.8rem;
-    margin-left: 3rem;
-    margin-top: 1rem;
-  }
-
-  .task .actions button {
-    font-size: 0.8rem;
-    margin-top: 1rem;
-  }
-
-  .due-date {
-    margin-left: 20em;
-    font-size: 0.8rem;
-  }
-
-  .sky {
-    top: 278px;
-    left: -58px;
-  }
-
-  .sky2 {
-    display: none;
-  }
-
-  .sky3 {
-    display: none;
   }
 }
