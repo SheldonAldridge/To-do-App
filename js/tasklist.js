@@ -34,7 +34,7 @@
     tasks.innerHTML = `
       <div class="task" data-id="${id}">
           <div class="content">
-              <input type ="checkbox" class="tick">
+              <input type ="checkbox" class="tick" data-id="${id}>
               <input type ="text" class = text id = "text" readonly>${task}
               <label class = "due-date" for ="text">${date}</label>
               <input type ="date" class = date id = "date">
@@ -60,12 +60,19 @@
     const { id } = target.dataset;
     const tasks = id ? document.querySelector('[data-id="${id}"]') : '';
   
-  
     const type = {
       edit: event.target.classList.contains("edit"),
-      delete: event.target.classList.contains("delete")
+      delete: event.target.classList.contains("delete"),
+      checkbox: event.target.classList.contains("tick")
     };
   
+    if(tasks && type.checkbox)
+    {
+      const text = tasks.querySelector("text")
+      target.innerText = "text"
+      text.style.textDecoration = 'line-through';
+    }
+
     const isFromSaveLabel = target.innerText.toLowerCase() === "save";
   
     if (tasks && type.edit && isFromSaveLabel) {
@@ -76,7 +83,7 @@
     }
   
     if (tasks && type.edit) {
-      const text = task.querySelector("text");
+      const text = tasks.querySelector("text");
       target.innerText = "save";
       text.removeAttribute("readonly");
       text.focus();
@@ -85,7 +92,7 @@
   
     if (tasks && type.delete) {
       const tasks = tasks.querySelector("task");
-      tasks.remove();
+      tasks.remove.appendChild(tasks);
       return;
     }
   });
@@ -97,15 +104,5 @@
   
   elements.form.addEventListener("submit", submitHandler);
   
-  const tick = document.querySelector("checkbox");
-
-  elements.tick.addEventListener("click", event =>{
-    
-    if(event.target.classList.contains('text'))
-  {
-    task.style.textdecorateion = "line-through";
-  }
-
-  })
 
   
