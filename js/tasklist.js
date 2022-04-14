@@ -32,7 +32,7 @@
     const tasks = document.createElement("div");
   
     tasks.innerHTML = `
-      <div class="task" date-id = "${id}">
+      <div class="task" data-id="${id}">
           <div class="content">
               <input type ="checkbox" class="tick">
               <input type ="text" class = text id = "text" readonly>${task}
@@ -58,9 +58,8 @@
   elements.list.addEventListener("click", (event) => {
     const { target } = event;
     const { id } = target.dataset;
-    const tasks = id ? document.querySelector('[data-id="${id}"]') : null;
-    const sort = event.target.classList.contains("sort")
-    sort.style.dispaly = "block";
+    const tasks = id ? document.querySelector('[data-id="${id}"]') : '';
+  
   
     const type = {
       edit: event.target.classList.contains("edit"),
@@ -70,7 +69,7 @@
     const isFromSaveLabel = target.innerText.toLowerCase() === "save";
   
     if (tasks && type.edit && isFromSaveLabel) {
-      const text = task.querySelector("text");
+      const text = tasks.querySelector("text");
       target.innerText = "Edit";
       text.addAttribute("readonly");
       return;
@@ -85,7 +84,7 @@
     }
   
     if (tasks && type.delete) {
-      const tasks = task.querySelector("task");
+      const tasks = tasks.querySelector("task");
       tasks.remove();
       return;
     }
@@ -98,5 +97,15 @@
   
   elements.form.addEventListener("submit", submitHandler);
   
+  const tick = document.querySelector("checkbox");
+
+  elements.tick.addEventListener("click", event =>{
+    
+    if(event.target.classList.contains('text'))
+  {
+    task.style.textdecorateion = "line-through";
+  }
+
+  })
 
   
