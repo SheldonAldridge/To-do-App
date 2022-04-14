@@ -29,11 +29,25 @@ body {
   overflow-y: auto;
 }
 
+
+.time {
+  font-size: 20px;
+  font-family: digital-7 !important;
+  color: var(--pink);
+  color:white;
+}
+
+.day {
+  font-size: 18px;
+  padding-bottom: 1rem;
+  font-family: "Fira sans", sans-serif;
+}
+
 .app-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 80px;
+  
+  font-size: 30px;
   opacity: 0.5;
+  color:rgb(255, 0, 0);
 }
 
 svg {
@@ -58,11 +72,12 @@ svg {
   flex-grow: 1;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .done span {
   text-decoration: line-through;
+  color:rgb(255, 0, 0);
 }
 
 input[type="checkbox"] {
@@ -70,9 +85,9 @@ input[type="checkbox"] {
 }
 
 .tick {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #333;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgb(255, 0, 0);
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
@@ -84,6 +99,7 @@ input[type="checkbox"] {
   content: '✓';
   font-size: 20px;
   display: none;
+  color:rgb(255, 0, 0);
 }
 
 .done .tick::before {
@@ -143,33 +159,36 @@ input[type="text"] {
 }
 
 .sky {
+  position: absolute;
   width: 86%;
   height: 100%;
   -webkit-transform: rotateZ(45deg);
   transform: rotate(45deg);
   top: -44px;
   left: -1594px;
-  z-index: -1;
+  
 }
 
 .sky2 {
+  position: absolute;
   left: 684px;
   top: 496px;
   width: 24%;
   height: 55%;
   -webkit-transform: rotateZ(45deg);
   transform: rotate(51deg);
-  z-index: -1;
+  
 }
 
 .sky3 {
+  position: absolute;
   left: 332px;
   top: 704px;
   width: 24%;
   height: 55%;
   -webkit-transform: rotateZ(45deg);
   transform: rotate(51deg);
-  z-index: -1;
+  
 }
 
 .star {
