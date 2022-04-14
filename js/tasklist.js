@@ -1,125 +1,104 @@
-// This is the array that will hold the todo list items
+window.addEventListener('load', () => {
+	const form = document.querySelector("#new-task-form");
+	const input = document.querySelector("#new-task-input");
+	const list_el = document.querySelector("#tasks");
+	const cal_el = document.querySelector("#calendar");
 
-let todoItems = [];
+	form.addEventListener('submit', (e) => {
+		e.preventDefault();
 
-function renderTodo(todo) {
-   // Select the first element with a class of `js-todo-list`
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
-
-  const list = document.querySelector('.js-todo-list');
-
-  // Use the ternary operator to check if `todo.checked` is true
-  // if so, assign 'done' to `isChecked`. Otherwise, assign an empty string
-  const item = document.querySelector(`[data-key='${todo.id}']`);
-  
-  if (todo.deleted) {
-    item.remove();
-    // add this line to clear whitespace from the list container
-    // when `todoItems` is empty
-    if (todoItems.length === 0) list.innerHTML = '';
-    return
-  }
-
-// Select the form element
-  const isChecked = todo.checked ? 'done': '';
-  // Create an `li` element and assign it to `node`
-  const node = document.createElement("li");
-  // Set the class attribute
-  node.setAttribute('class', `todo-item ${isChecked}`);
-  // Set the data-key attribute to the id of the todo
-  node.setAttribute('data-key', todo.id);
-  // Set the contents of the `li` element created above
-  node.innerHTML = `
-    <input id="${todo.id}" type="checkbox"/>
-    <label for="${todo.id}" class="tick js-tick"></label>
-    <span>${todo.text}</span>
-    <button class="delete-todo js-delete-todo">
-    <svg><use href="#delete-icon"></use></svg>
-    </button>
-  `;
+		const task = input.value;
+		const date = cal_el.value;
 
 
-  if (item) {
-    list.replaceChild(node, item);
-  } else {
-    list.append(node);
-  }
-}
+		if(!task && !date)
+		{
+			alert("Please fill in task and select date")
+			return
+			
+		}
+		if(!task)
+		{
+			alert("Please fill in task")
+			return
+		}
+		if(!date)
+		{
+			alert("Please fill select date")
+			return
+		}
 
-// This function will create a new todo object based on the
-// text that was entered in the text input, and push it into
-// the `todoItems` array
+		const task_el = document.createElement('div');
+		task_el.classList.add('task');
 
-function addTodo(text) {
-  const todo = {
-    text,
-    checked: false,
-    id: Date.now(),
-  };
+		const task_content_el = document.createElement('div');
+		task_content_el.classList.add('content');
 
-  todoItems.push(todo);
-  renderTodo(todo);
-}
+		task_el.appendChild(task_content_el);
 
-function toggleDone(key) {
-  // findIndex is an array method that returns the position of an element
-  // in the array.
-  const index = todoItems.findIndex(item => item.id === Number(key));
-  // Locate the todo item in the todoItems array and set its checked
-  // property to the opposite. That means, `true` will become `false` and vice
-  // versa.
-  todoItems[index].checked = !todoItems[index].checked;
-  renderTodo(todoItems[index]);
-}
+		const task_input_el = document.createElement('input');
+		task_input_el.classList.add('text');
+		task_input_el.type = 'text';
+		task_input_el.value = task;
+		task_input_el.setAttribute('readonly', 'readonly');
 
-function deleteTodo(key) {
-  const index = todoItems.findIndex(item => item.id === Number(key));
-  const todo = {
-    deleted: true,
-    ...todoItems[index]
-  };
-  todoItems = todoItems.filter(item => item.id !== Number(key));
-  renderTodo(todo);
-}
+		task_content_el.appendChild(task_input_el);	
+		
+		const checkbox = document.createElement('input')
+		checkbox.type = "checkbox";
+		checkbox.classList.add('tick')
 
-// Select the form element
-const form = document.querySelector('.js-form');
-// Add a submit event listener
-form.addEventListener('submit', event => {
-   // prevent page refresh on form submission
-  event.preventDefault();
-   // select the text input
-  const input = document.querySelector('.js-todo-input');
+		task_content_el.appendChild(checkbox);
+	
+		console.log(checkbox);
 
-  const text = input.value.trim();
-  if (text !== '') {
-    addTodo(text);
-    input.value = '';
-    input.focus();
-  }
-});
+		
 
-const list = document.querySelector('.js-todo-list');
+		const due_date = document.createElement('label');
+		due_date.htmlFor = "text";
+		due_date.classList.add('dueDate');
+		due_date.innerText = cal_el.value;
 
-// Add a click event listener to the list and its children
-list.addEventListener('click', event => {
-  if (event.target.classList.contains('js-tick')) {
-    const itemKey = event.target.parentElement.dataset.key;
-    toggleDone(itemKey);
-  }
-  
-  if (event.target.classList.contains('js-delete-todo')) {
-    const itemKey = event.target.parentElement.dataset.key;
-    deleteTodo(itemKey);
-  }
-});
+		task_content_el.appendChild(due_date);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const ref = localStorage.getItem('todoItems');
-  if (ref) {
-    todoItems = JSON.parse(ref);
-    todoItems.forEach(t => {
-      renderTodo(t);
+		const task_actions_el = document.createElement('div');
+		task_actions_el.classList.add('actions');
+		
+		const task_edit_el = document.createElement('button');
+		task_edit_el.classList.add('edit');
+		task_edit_el.innerText = 'Edit';
+
+		const task_delete_el = document.createElement('button');
+		task_delete_el.classList.add('delete');
+		task_delete_el.innerText = 'Delete';
+
+		task_actions_el.appendChild(task_edit_el);
+		task_actions_el.appendChild(task_delete_el);
+
+		task_el.appendChild(task_actions_el);
+
+		list_el.appendChild(task_el);
+
+		input.value = '';
+
+        task_edit_el.addEventListener('click', () =>{
+            if(task_edit_el.innerText.toLowerCase() == "edit")
+            {
+            task_input_el.removeAttribute("readonly");
+            task_input_el.focus();
+            task_edit_el.innerText = "Save";
+            }
+            else
+            {
+                task_input_el.setAttribute("readonly","readonly");
+                task_edit_el.innerText = "Edit";
+            }
+        });
+
+        task_delete_el.addEventListener('click', () => {
+            list_el.removeChild(task_el);
+        });
+		
     });
-  }
+
 });
