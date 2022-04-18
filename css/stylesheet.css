@@ -564,14 +564,21 @@ main {
     margin-top: 1rem;
   }
 
+  .task .content
+  {
+    width:90%;
+  }
+
   .task .actions button {
     font-size: 0.8rem;
     margin-top: 1rem;
   }
 
   .due-date {
-    margin-left: 20em;
+    margin-left: 16em;
     font-size: 0.8rem;
+    margin-top: -1rem;
+    
   }
 
   .sky {
