@@ -1,3 +1,5 @@
+const STORAGE_KEY = "key";
+
 /************************************
  * creates objct of elements needed *
  ************************************/
@@ -19,7 +21,7 @@
  * function that creates the HTML elements    *
  **********************************************/
 
- const createTask = (input) => {
+ const createTask = () => {
     const id = createId()
     const task = elements.input.value;
     const date = elements.cal.value;
@@ -127,4 +129,15 @@ elements.list.addEventListener('click',event => {
 elements.form.addEventListener("submit", submitHandler);
 
 
+document.addEventListener('DOMContentLoaded', () =>{
+	createTask()
+
+	let newTask = localStorage.getItem(STORAGE_KEY);
+
+	newTask = JSON.parse(newTask)
+
+	let taskElement = document.querySelectorAll('.task');
+
+	taskElement.innerHTML += 
+})
 
