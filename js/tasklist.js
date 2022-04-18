@@ -73,7 +73,7 @@ function markOdddueDate(){
             }
         });
     });
-	console.log(parentElem)
+	
 }
 
 /**************************************************************
@@ -91,17 +91,17 @@ elements.list.addEventListener('click',event => {
 
     const isFromSaveLabel = target.innerText.toLowerCase() === 'save'
 
-    //Checking to see if buttons are pressed
+    //Checking to see if buttons are pressed//
 
     if(task && type.edit && isFromSaveLabel){
-        const text = task.querySelector('text')
+        const text = task.querySelector('.text')
         target.innerText = 'Edit'
-        text.setAttribute('readonly', true)
+        text.setAttribute('readonly', "true")
         return
     };
 
     if(task && type.edit){
-        const text = task.querySelector('text')
+        const text = task.querySelector('.text')
         target.innerText = 'save'
         text.removeAttribute('readonly')
         text.focus()
@@ -109,8 +109,8 @@ elements.list.addEventListener('click',event => {
     };
 
     if(task && type.delete){
-        task.querySelector('.task')
-		elements.list.removeChild(task)
+        const textlist = task.querySelector('.task')
+        textlist.appendChild.remove()
         return
     }
     
@@ -138,6 +138,6 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 	let taskElement = document.querySelectorAll('.task');
 
-	taskElement.innerHTML += 
+	
 })
 
