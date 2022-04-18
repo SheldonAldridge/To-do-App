@@ -19,7 +19,7 @@
  * function that creates the HTML elements    *
  **********************************************/
 
- const createTask = () => {
+ const createTask = (input) => {
     const id = createId()
     const task = elements.input.value;
     const date = elements.cal.value;
@@ -47,18 +47,18 @@
     </div>
     `
     elements.list.appendChild(tasks)
-    listen()
+    markOdddueDate()
+	marktext()
     return tasks
-
 }
 
-
 /********************************************
- * Marks tasks as complete with checkbox    *
+ * Marks due date as complete with checkbox    *
  ********************************************/
 
-function listen(){
+function markOdddueDate(){
     let allCheckboxes = document.querySelectorAll('.tick')
+
     allCheckboxes.forEach(checkbox =>{
         checkbox.addEventListener('change',(e)=>{
             let parentElem=e.target.parentElement
@@ -71,6 +71,7 @@ function listen(){
             }
         });
     });
+	console.log(parentElem)
 }
 
 /**************************************************************
