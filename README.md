@@ -7,10 +7,9 @@ The following features that the application currently have are as follows:
 
 - Create a task with a due date
 - Edit the Task
-- Delete the task
+- Mark as complete
 
 # Features to come
-
 - Store user list
-- Mark as complete
+- Delete the task
 - Sort the User List
