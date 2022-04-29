@@ -64,7 +64,7 @@ function markOdddueDate(){
     allCheckboxes.forEach(checkbox =>{
         checkbox.addEventListener('change',(e)=>{
             let parentElem=e.target.parentElement
-
+            console.log(e.target.parentElement)
             if(e.target.checked){
                 parentElem.style.textDecoration = "line-through"
             }
