@@ -21,7 +21,7 @@ const STORAGE_KEY = "task-list-storage-key";
  * function that creates the HTML elements    *
  **********************************************/
 
- const createTask = () => {
+ const createTask = (task) => {
     const id = createId()
     const task = elements.input.value;
     const date = elements.cal.value;
@@ -50,7 +50,7 @@ const STORAGE_KEY = "task-list-storage-key";
     `
     elements.list.appendChild(tasks)
     markOfdddueDate()
-    getStoredtask()
+    
     return tasks
 }
 
@@ -135,12 +135,14 @@ elements.form.addEventListener("submit", submitHandler);
     const storedkey = localStorage.getItem(STORAGE_KEY);
     if(storedkey){
       tasks = JSON.parse(storedkey);
-      createTask(tasks)
+      createTask()
     }
   }
 
  function Storingtasks(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(createTask(tasks)))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(createTask(task)))
  }
+
+ getStoredtask()
 
 
