@@ -1,4 +1,4 @@
-const STORAGE_KEY = "key";
+const STORAGE_KEY = "task-list-storage-key";
 
 /************************************
  * creates objct of elements needed *
@@ -49,8 +49,7 @@ const STORAGE_KEY = "key";
     </div>
     `
     elements.list.appendChild(tasks)
-    markOdddueDate()
-	marktext()
+    markOfdddueDate()
     return tasks
 }
 
@@ -58,7 +57,7 @@ const STORAGE_KEY = "key";
  * Marks due date as complete with checkbox    *
  ********************************************/
 
-function markOdddueDate(){
+function markOfdddueDate(){
     let allCheckboxes = document.querySelectorAll('.tick')
 
     allCheckboxes.forEach(checkbox =>{
@@ -124,20 +123,24 @@ elements.list.addEventListener('click',event => {
     event.preventDefault();
     createTask();
 }
-
-
 elements.form.addEventListener("submit", submitHandler);
 
 
-document.addEventListener('DOMContentLoaded', () =>{
-	createTask()
+/*********************************
+ * Storing tasks in local storage*
+ *********************************/
 
-	let newTask = localStorage.getItem(STORAGE_KEY);
+function Storingtasks(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
+    createTask(tasks)
+}
 
-	newTask = JSON.parse(newTask)
+function getStoredtask(){
+    const storedkey = localStorage.get(STORAGE_KEY);
+    if(storedkey){
+    tasks = JSON.parse(storedkey);
+    createTask(tasks)
+    }
+}
 
-	let taskElement = document.querySelectorAll('.task');
-
-	
-})
-
+getStoredtask()
