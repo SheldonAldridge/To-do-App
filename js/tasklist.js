@@ -50,6 +50,7 @@ const STORAGE_KEY = "task-list-storage-key";
     `
     elements.list.appendChild(tasks)
     markOfdddueDate()
+    getStoredtask()
     return tasks
 }
 
