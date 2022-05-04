@@ -130,17 +130,16 @@ elements.form.addEventListener("submit", submitHandler);
  * Storing tasks in local storage*
  *********************************/
 
-function Storingtasks(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
-    createTask(tasks)
-}
-
-function getStoredtask(){
-    const storedkey = localStorage.get(STORAGE_KEY);
+ function getStoredtask(){
+    const storedkey = localStorage.getItem(STORAGE_KEY);
     if(storedkey){
-    tasks = JSON.parse(storedkey);
-    createTask(tasks)
+      tasks = JSON.parse(storedkey);
+      createTask(tasks)
     }
-}
+  }
 
-getStoredtask()
+ function Storingtasks(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(createTask(tasks)))
+ }
+
+
